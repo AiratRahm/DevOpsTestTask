@@ -1,0 +1,31 @@
+---
+- name: install Flaskex
+  hosts: ServerUbuntu
+  
+  tasks:
+    - name: install pyton3-pip и git
+      apt:
+        pkg:
+        - python3-pip
+        - git
+        autoclean: yes        
+        update_cache: yes
+            
+    - name: add new user 'User1' 
+      user: 
+        name: User1
+        
+    - name: clone git repo
+      git: 
+        repo: https://github.com/anfederico/Flaskex 
+        dest: /home/User1/Flaskex
+      become: true
+      become_user: User1
+      become_method: su
+        
+    - name: start ServerUbuntu
+      shell: cd /home/User1/Flaskex && pip3 install -r requirements.txt && python3 app.py &
+      become: true
+      become_user: User1
+      become_method: su
+        

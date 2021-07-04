@@ -1,0 +1,2 @@
+[ServerUbuntu]
+10.0.2.15 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=1234
